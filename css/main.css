@@ -1,0 +1,265 @@
+#Days {
+	opacity: 0;
+	transition: 1s opacity;	
+	color:rgba(255,255,255,1);
+	font-family:"Black Pearl";
+	text-align:center;
+	font-size:60px;
+	margin-top:150px;
+}
+
+#location {
+	opacity: 0;
+	transition: 1s opacity;	
+	color:rgba(255,255,255,1);
+	font-family:"Black Pearl";
+	text-align:center;
+	font-size:100px;
+	margin-top:150px;
+	
+}
+
+#next, #next2, #next3 {
+	display:block;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left:auto;
+	margin-right:auto;	
+	background-image:url(../images/namebg.jpg);
+	color:rgba(255,255,255,1);
+	padding:20px 40px;	
+}
+
+
+
+#textBox {
+	text-align:center;
+	color:white;
+	padding:65px;
+	font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size:18px;
+	background-color:rgba(51,51,51,.8);
+	line-height:30px;
+}
+
+
+
+
+
+
+
+#kill {
+	background-color:rgba(255,0,0,1);	
+
+}
+
+#passCode {
+	padding: 30px;
+	border:solid 2px black;
+}
+
+
+#battle {
+	padding: 30px;
+	border:solid 2px black;
+}
+
+
+
+
+
+
+
+/* ----------------------- Start Page --------------------------------*/
+
+
+#body1 {
+	
+	background-image:url(../images/titlepage.gif); 
+	background-repeat:no-repeat;
+	background-size:cover;
+	background-attachment:fixed;
+}
+
+
+#Title {
+	font-size:130px;
+	font-weight:bold;
+	text-align:center;
+	margin-top: 150px;
+	font-family:"Black Pearl";
+}
+
+@font-face {
+	font-family:"Black Pearl";	
+	src:url(../fonts/BlackPearl.ttf);
+}
+
+
+#username {
+	text-align:center;
+	font-size:24px;	
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+	margin-bottom: 100px;
+	margin-top:40px;
+	padding: 10px;
+	width:250px;
+	background-image:url(../images/namebg.jpg);
+
+	border:0px;
+	font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color:#FFFFFF;
+	font-weight:bold;	
+}
+
+
+#reset1 {
+	margin-left: 10%;	
+	padding:10px;
+	background-color:#333333;
+	color:rgba(255,255,255,1);
+	border:0px;	
+}
+
+#name {
+	text-align:center;
+	font-size:36px;	
+	font-weight:bold;
+	margin-bottom: 50px;
+	color:red;
+	font-family:"Black Pearl";
+
+
+}
+
+
+
+/* -------------------------- First Level ----------------------------------*/
+
+#body2 {
+	background-image:url(../images/firstlevelbg.jpg);
+	background-repeat:no-repeat;
+	background-size:cover;
+	background-attachment:fixed;
+}
+
+
+#option1, #option2a, #option2b, #option2c, #option2ab, #option3, #option3a, #option3b, #option3b2, #option3c, #option3d, #option3dtime, #option4, #No, #option4a, #option4b, #option4c, #option5a, #option5b, #finalSlice {
+	
+	margin-top: 20px;
+	margin-bottom: 20px;
+	display:block;
+	margin-left:auto;
+	margin-right:auto;	
+	background-image:url(../images/namebg.jpg);
+	color:rgba(255,255,255,1);
+	padding:20px 40px;		
+}
+
+
+
+
+/* ------------------------------ Second Level -------------------------------------- */
+
+
+#body3 {
+	background-image:url(../images/firstlevelbg.jpg);
+	background-repeat:no-repeat;
+	background-size:cover;
+	background-attachment:fixed;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ----------------------------------- Third Level ---------------------------------------------------- */
+
+
+#body4 {
+	background-image:url(../images/thedeckbg.gif);
+	background-repeat:no-repeat;
+	background-size:cover;
+	background-attachment:fixed;
+	background-position:bottom;	
+
+}
+
+
+.table1 {
+	padding: 30px;
+	border:solid 2px black;
+}
+
+#tablePuzzle {
+	margin-left: auto;
+	margin-right: auto;	
+	
+	
+}
+
+
+#playerMove {
+	margin-left:auto;
+	margin-right:auto;
+			
+}
+
+
+#up, #down, #left, #right, #left2, #right2 {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left:5px;
+	margin-right:5px;
+	background-image:url(../images/namebg.jpg);
+	color:rgba(255,255,255,1);
+	padding:20px 40px;	
+	
+	
+}
+
+
+
+
+/* ------------------------------------------ Fourth Level ----------------------------------------------- */
+
+#body5 {
+	background-image:url(../images/thedeckbg.gif);
+	background-repeat:no-repeat;
+	background-size:cover;
+	background-attachment:fixed;
+	background-position:bottom;		
+}
+
+#battle {
+	margin-left:auto;
+	margin-right:auto;	
+}
+
+#playerMove2 {
+	margin-left:auto;
+	margin-right:auto;		
+}
+
+
+#passCode {
+	margin-left:auto;
+	margin-right:auto;	
+	background-color:white;
+	
+}
