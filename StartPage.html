@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8" />
+    <title>Adventure Game</title>
+    
+   <link rel="stylesheet" href="css/browser_reset.css" type="text/css" >
+		<link rel="stylesheet" href="css/main.css" type="text/css">    
+ 	<script>
+	var x = 0;
+	
+	function main () {																
+		var value = document.getElementById("username").value
+		if (value == "") {
+		alert ("You did not enter a valid answer");	
+		} else {
+		var name = document.info.uName.value;
+
+		sessionStorage.setItem("uname", name); 
+		
+		document.getElementById("username").type = "button";
+		document.getElementById("username").value = "Play Now!";
+		document.getElementById("name").innerHTML = "Welcome " + value+ "!";			
+		x = 1;
+		}
+		return false;
+		
+	}
+	
+	function mainGame() {															
+
+	if (x == 1) {
+		window.location = "FirstLevel.html";	
+	}
+	
+	document.getElementById("username").value = "";
+	
+	}
+	
+	
+	
+	
+	function restart () {															
+			x = 0;
+		document.getElementById("username").type = "text";
+		document.getElementById("username").value = "Enter Your Name";
+		document.getElementById("name").innerHTML = "";
+	return false;
+	}
+	
+	
+	
+	
+	
+	
+	
+		
+	</script>
+    
+    
+    
+</head>
+
+<body id="body1">
+
+
+<h1 id="Title">	A Pirate's Life </h1>
+																	
+
+<form name="info" method="post" onSubmit="return main ();" > 
+
+
+<input type="text" id="username" name="uName" onclick="mainGame ();" value="Enter Your Name" />					
+
+<p>
+<button type="reset"  id="reset1" value="Reset Form" onClick="return restart ();"> Reset </button>			
+</p>
+
+</form>
+<h2 id="name"> </h2>
+
+</body>
+
+</html>

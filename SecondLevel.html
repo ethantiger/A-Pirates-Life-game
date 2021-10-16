@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html>
+
+
+<head>
+
+	<meta charset="utf-8" />
+    <title> Second Level </title>
+    <link rel="stylesheet" href="css/browser_reset.css" type="text/css" >
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    
+  
+    
+    
+</head>
+
+
+<body id="body3">
+
+<h1 id="location"> </h1>
+<p id="textBox"> </p>
+<form name="Interactions" id="Interactions" method="post">
+
+<input type="hidden" id="option1" name="choice1" onclick="part1 ();" value="Use key to escape the cell">
+<input type="hidden" id="option2a" name="choice2" onclick="y=1;part1 ();" value="Rescue the captain and crew">
+<input type="hidden" id="option2b" name="choice2" onclick="y=2;part1 ();" value="Leave the captain and crew">
+<input type="hidden" id="option3" name="choice3" onclick="part1 ();" value="Peek outside the brig">
+<input type="hidden" id="option4a" name="choice4" onclick="part1 ();" value="Ask Captain what he knows">
+<input type="hidden" id="option4b" name="choice4" onclick="part1 ();" value="Why do you have firecrackers?">
+<input type="hidden" id="option4c" name="choice4" onClick="part1 ();" value="Brainstorm">
+<input type="hidden" id="option5a" name= "choice5" onclick="z=4;part1 ();" value="Exit the brig">
+<input type="hidden" id="option5b" name= "choice5" onclick="part1 ();" value="Review plan again">
+
+
+<p> <input type="hidden" id="next" value="Next" onClick="part1 ();"> </p>
+
+</form> 
+
+
+
+
+</body>
+
+ <script>
+
+   var x = 0;
+   var y = 0;
+   var z = 0;
+   var name = sessionStorage.getItem("uname");	
+   
+   
+function locationShow () {
+document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+	 window.setTimeout(fadein1, 2000);
+	
+
+	function fadein1() {
+  document.getElementById("location").style.opacity = '1';
+  
+	window.setTimeout(fadeout1, 4000);
+}
+	function fadeout1 () {
+		
+	document.getElementById("location").style.opacity = '0';
+	
+	
+	window.setTimeout(buttonShow, 2000);
+	
+	}
+
+
+	}
+	
+	
+	function buttonShow () {
+	document.getElementById("next").value = "Enter";	
+	document.getElementById("next").type = "button";
+	document.getElementById("location").innerHTML = "";	
+	}
+	
+	
+	
+   
+   
+   window.onload =  part1 ();
+   
+   function part1 () {
+	   document.getElementById("textBox").setAttribute("style" , "visibility:visible");
+	   if (x == 0) {
+		   document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+			document.getElementById("option1").type = "button";
+			 x++;
+	   } else if (x == 1) {
+			document.getElementById("option1").type = "hidden";
+			document.getElementById("textBox").innerHTML = name + " used the key to unlock the door!!";	
+			document.getElementById("textBox").style.fontStyle = "italic";	   			
+			document.getElementById("next").type = "button";
+			x++;
+	   } else if (x == 2) {
+		  document.getElementById("next").type = "hidden";
+		  document.getElementById("textBox").innerHTML = "";
+		  document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+		  document.getElementById("option2a").type = "button";
+		  document.getElementById("option2b").type = "button"; 
+			x++;
+	   } else if (x == 3) {
+			if (y == 1) {
+					document.getElementById("textBox").innerHTML = name + " uses the key and unlocks the captain and former crew's cell.";
+					document.getElementById("textBox").style.fontStyle = "italic";
+					document.getElementById("next").type = "button";
+					document.getElementById("option2a").type = "hidden";
+					document.getElementById("option2b").type = "hidden";
+					x++;
+					z = 1;
+					var keyChoice = 1;
+					sessionStorage.setItem("choice", keyChoice);
+			} else if (y == 2) {
+					document.getElementById("textBox").innerHTML = name + " ignores the captain and his crew's cries for help.";
+					document.getElementById("textBox").style.fontStyle = "italic";
+					document.getElementById("option2a").type = "hidden";
+					document.getElementById("option2b").type = "hidden";
+					document.getElementById("next").type = "button";
+					x++;
+					z = 2;
+					var keyChoice = 2;
+					sessionStorage.setItem("choice", keyChoice);
+			}
+		   
+	   } else if (x == 4) {
+		   	document.getElementById("option3").type = "button";
+			document.getElementById("next").type = "hidden";
+			document.getElementById("textBox").innerHTML = "";
+			document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+			x++;
+	   } else if (x == 5) {
+		   document.getElementById("option3").type = "hidden";
+			document.getElementById("textBox").innerHTML = "There are pirates everywhere and the guard is coming back. What to do...";
+			document.getElementById("textBox").style.color = "#35dd43";
+			document.getElementById("next").type = "button";
+			x++;   
+	   } else if (x == 6) {
+		   		document.getElementById("option3").value = "Knock out the guard";
+			   document.getElementById("option3").type = "button";
+			   document.getElementById("next").type = "hidden";
+			   document.getElementById("textBox").innerHTML = "";
+			   document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+			   x++;
+	   } else if (x == 7) {
+			document.getElementById("textBox").innerHTML = name + " used the long rod to knock out the guard.";  
+			document.getElementById("textBox").style.fontStyle = "italic"; 
+			document.getElementById("option3").type = "hidden";
+			document.getElementById("next").type = "button";
+			x++;
+	   } else if (x == 8) {
+			document.getElementById("option3").value = "Change into the guard's clothes";
+			document.getElementById("option3").type = "button";
+			document.getElementById("textBox").innerHTML = "";
+			document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+			document.getElementById("next").type = "hidden";
+			x++;
+			
+	   } else if (x == 9) {
+		   document.getElementById("next").type = "button";
+		   document.getElementById("textBox").innerHTML = name + " changed into the pirate's clothes. You are now disguised as a pirate.";
+		   document.getElementById("textBox").style.fontStyle = "italic";
+		   document.getElementById("option3").type = "hidden";
+		   x++;
+		   
+	   } else if (x == 10) {
+		   if (z == 1) {
+						document.getElementById("option4a").type = "button";
+						document.getElementById("textBox").innerHTML = "";
+						document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+						document.getElementById("next").type = "hidden";
+						z = 3;
+				} else if (z == 2) {
+						document.getElementById("option4c").type = "button";
+						document.getElementById("textBox").innerHTML = "";
+						document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+						document.getElementById("next").type= "hidden";
+						z = 6;
+				} else if (z == 3) {
+						document.getElementById("option4a").type = "hidden";
+						document.getElementById("textBox").innerHTML = "Hmmmm...well there are firecrackers in the storage room that we could use as a distraction. As you light them up, the crew and I can get the weapons.";
+						document.getElementById("textBox").style.color = "#4286f4";
+						document.getElementById("next").type = "button";
+						z++;
+				} else if (z == 4) {
+						document.getElementById("option4b").type = "button";
+						document.getElementById("textBox").innerHTML = "";
+						document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+						document.getElementById("next").type = "hidden";
+						z++;	
+				} else if (z == 5) {
+						document.getElementById("option4b").type = "hidden";
+						document.getElementById("next").type = "button";
+						document.getElementById("textBox").innerHTML = "You know just in case of celebration. Yaaa not the smartest thing to have on a wooden ship.";	
+						document.getElementById("textBox").style.color = "#4286f4";
+						x++;
+				} else if (z ==6) {
+						document.getElementById("textBox").innerHTML = "I need to escape from this ship. There has to be a row boat somewhere here.";
+						document.getElementById("textBox").style.color = "#35dd43";
+						document.getElementById("option4c").type = "hidden";
+						document.getElementById("next").type = "button";	
+						x++;
+				}
+	   } else if (x == 11) {
+		   		document.getElementById("textBox").innerHTML = "";
+				document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+				  document.getElementById("option5a"). type = "button";
+				  document.getElementById("option5b").type = "button";
+				  document.getElementById("next").type = "hidden";
+				  x++;
+	   } else if (x == 12) {
+			if (z == 5) {
+				document.getElementById("option5b").type = "hidden";
+				document.getElementById("textBox").innerHTML = name + " is going to go into the storage room to grab firecrackers. As " + name + " is distracting the pirates, the former captain and crew will grab weapons and then retaliate.";	
+				document.getElementById("textBox").style.fontStyle = "italic";
+				x++;
+			} else if (z == 6) {
+				document.getElementById("option5b").type = "hidden";
+				document.getElementById("textBox").innerHTML = name + " is going to attempt to escape using the row boat that should be somewhere out on the deck.";	
+				document.getElementById("textBox").style.fontStyle = "italic";
+				x++;
+			} else {
+				x++;
+				part1 ();	
+			}
+	   } else if (x == 13) {
+		   		document.getElementById("option5a").type= "hidden";
+				document.getElementById("option5b").type = "hidden";
+				document.getElementById("textBox").innerHTML = "";
+				document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+ 				document.getElementById("body3").style.backgroundImage = "url('images/thedeckbg.gif')";
+				document.getElementById("body3").style.backgroundPosition = "bottom";
+				document.getElementById("location").innerHTML = "The Deck";
+				x++;
+				locationShow ();
+	   } else if (x == 14) {
+				window.location = "ThirdLevel.html";   
+	   }
+	 
+   }
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   </script> 
+
+</html>
+
+

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8" />
+    <title> First Level </title>
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="css/browser_reset.css" type="text/css" >
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    
+  
+    
+    
+    
+    
+    
+    
+</head>
+
+
+
+<body id="body2">
+<h1 id="location">The Brig </h1>
+<p id="Days">Day 1</p>
+<p id="textBox" style="visibility:hidden"> </p>
+
+
+
+
+
+<form name="Interactions" id="Interaction1" method="post" >
+    <input type="hidden" id="option1" name="choice1"  onClick="gameStart ();" value="Where am I?">
+    <input type="hidden" id="option2a" name="choice2" onClick="y=1;gameStart();" value="Who are you?">
+    <input type="hidden" id="option2b" name="choice2" onClick="y=2;gameStart ();" value="What do we do now?">
+	<input type="hidden" id="option3a" name="choice3" onClick="y=1;interaction3 ();" value="Look at the time">
+	<input type="hidden" id="option3b" name="choice3" onClick="y=2;interaction3 ();" value="Look around the cell">
+    <input type="hidden" id="option3b2" name="choice3" onClick="y=2;interaction3harvested ();" value="Break the Bench and Harvest Straw?">
+    <input type="hidden" id="option3c" name="choice3" onClick="y=3;interaction3 ();" value="Talk to the man">
+    <input type="hidden" id="option3d" name="choice3" onClick="y=4;interaction3 ();" value="Proceed to next day">
+    <input type="hidden" id="option3dtime" name="timeSelect">
+    <input type="hidden" id="option4" name="choice4" onClick="act2 ();" value="Combine materials">
+</form>
+
+
+<p>
+<input type="hidden" id="next" value="Wake up" onClick="gameStart ();">
+<input type="hidden" id="No" value="No" onClick="clickedD = 0;y=0;interaction3 ();">
+</p>
+
+</body>
+
+  <script>
+	var x = 0;
+	var y =0;
+	var z = 0;
+	var clickedA = 0;
+	var clickedB = 0;
+	var clickedC = 0;
+	var clickedD = 0;
+	var puzzleSolved = 0;
+	var dayCounter = 1;
+	
+	
+	
+	var name = sessionStorage.getItem("uname");	
+	
+	
+
+	window.onload = locationShow ();
+
+
+function locationShow () {
+document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+	 window.setTimeout(fadein1, 2000);
+	
+
+	function fadein1() {
+  document.getElementById("location").style.opacity = '1';
+  
+	window.setTimeout(fadeout1, 4000);
+}
+	function fadeout1 () {
+		
+	document.getElementById("location").style.opacity = '0';
+	
+	
+	window.setTimeout(days, 2000);
+	
+	}
+
+
+	}
+	
+	
+	function days () {
+	document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+	document.getElementById("location").innerHTML = "";
+	 window.setTimeout(fadein, 1000);
+	
+
+	function fadein() {
+  document.getElementById("Days").style.opacity = '1';
+  
+	window.setTimeout(fadeout, 2000);
+}
+	function fadeout () {
+		
+	document.getElementById("Days").style.opacity = '0';
+	
+	
+	window.setTimeout(buttonShow, 2000);
+	}
+
+
+	}
+	
+	
+	function buttonShow () {
+	document.getElementById("next").value = "Wake up";	
+	document.getElementById("next").type = "button";
+	document.getElementById("Days").innerHTML = "";	
+	}
+	  
+	
+	function gameStart () {
+	document.getElementById("textBox").setAttribute("style" , "visibility:visible");
+		if (x == 0) {
+		document.getElementById("next").value= "Next";
+		document.getElementById("textBox").innerHTML =  name + " wakes up in the brig of a ship. Unaware of where he is, he sees another man in the cell next to his.";	
+		document.getElementById("textBox").style.fontStyle = "italic";
+		x++;
+		} else if (x == 1) {
+			document.getElementById("textBox").innerHTML = "";
+			document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+			document.getElementById("option1").type="button";
+			document.getElementById("next").type = "hidden";
+		x++;	
+			
+		} else if (x == 2) {
+			document.getElementById("option1").type = "hidden";
+			document.getElementById("textBox").innerHTML = "Welcome to your new home. Ahaha...my crew and I have been stuck in here for weeks just barely managing to stay alive and you're gonna suffer the same fate.";
+			document.getElementById("textBox").style.color = "#4286f4";
+			document.getElementById("next").type = "button";
+			x++;
+		} else if (x == 3) {
+			document.getElementById("textBox").innerHTML = "";
+			document.getElementById("next").type = "hidden";
+			document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+			document.getElementById("option2a").type = "button";
+			document.getElementById("option2b").type = "button";
+			
+			x++;
+		} else if (x == 4) {
+				document.getElementById("next").type = "button";
+				document.getElementById("option2a").type = "hidden";
+				document.getElementById("option2b").type = "hidden";
+			if (y == 1) {
+				document.getElementById("textBox").innerHTML = "I was the captain of this ship. Until those filthy pirates took over. Nothing feels worse than letting my crew down.";
+				document.getElementById("textBox").style.color = "#4286f4";
+				clickedA = 1;
+				y = 0;
+			} else if (y == 2) {
+				
+				document.getElementById("textBox").innerHTML =	"Well...we wait obviously. If you want to survive, you gotta be obedient. Those pirates are crazy man. Just trust me on this.";
+				document.getElementById("textBox").style.color = "#4286f4";
+				y = 3;
+			} else if (y == 3) {
+				document.getElementById("textBox").innerHTML = "HEY KEEP IT DOWN.";
+				document.getElementById("textBox").style.color = "#f44141";
+				y = 4; 
+			} else if (y == 4) {
+				document.getElementById("textBox").innerHTML = "EEK!!";
+				document.getElementById("textBox").style.color = "#4286f4";
+				clickedB = 1;
+				y = 0;
+			} else {
+				 if (clickedA == 1 && clickedB == 1) {
+				x++;
+				gameStart ();
+				} else if (clickedA == 1) {
+				document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+				document.getElementById("option2b").type = "button";
+				document.getElementById("textBox").innerHTML = "";
+				document.getElementById("next"). type = "hidden";	
+					
+				} else if (clickedB == 1) {
+				document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+				document.getElementById("option2a").type = "button";
+				document.getElementById("textBox").innerHTML = "";
+				document.getElementById("next"). type = "hidden";
+				} 
+			}
+			
+			
+			
+		} else if (x == 5) {
+			
+	document.getElementById("textBox").innerHTML = name + " looks around and sees the pirate who was shouting. " + name + " looks a little bit to the right and sees what seems to be the keys to the cells hanging on a wall.";
+	document.getElementById("textBox").style.fontStyle = "italic";
+				x++; 
+		} else if (x == 6) {
+		document.getElementById("textBox").innerHTML = "YAWN... Oh well would you look at the time."
+		document.getElementById("textBox").style.color = "#f44141";
+			x++;
+		} else if (x == 7) {
+			document.getElementById("textBox").innerHTML = "*The guard leaves the room*";
+			document.getElementById("textBox").style.fontStyle = "italic";	
+			x++;
+		} else if (x >= 8) {
+			
+			interaction3 ();
+		} else {
+				alert("You did not select an option");	
+		
+			
+		}
+		
+		
+	}
+
+	
+	
+	function interaction3 () {
+		document.getElementById("textBox").setAttribute("style" , "visibility:visible");
+		document.getElementById("next").value = "Next";
+		if (x == 8) {
+			document.getElementById("textBox").innerHTML = "";
+			document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+			document.getElementById("next").type = "hidden";
+			document.getElementById("option3a").type = "button";
+			document.getElementById("option3b").type = "button";
+			document.getElementById("option3c").type = "button";
+			document.getElementById("option3d").type = "button";
+			x++;
+			clickedA = 0;
+			clickedB = 0;
+			clickedC = 0;
+			clickedD = 0;
+		} else if (x == 9) {
+			document.getElementById("option3a").type = "hidden";
+			document.getElementById("option3b").type = "hidden";
+			document.getElementById("option3c").type = "hidden";
+			document.getElementById("option3d").type = "hidden";
+			if (y == 1) {
+				document.getElementById("textBox").innerHTML = name + " looks at the clock that's hanging on the wall. It reads 12:00. " + name + " then looks out the window. It seems to be sunny.";	
+				document.getElementById("next").type = "button";
+				document.getElementById("textBox").style.fontStyle = "italic";
+				clickedA = 1;
+				y = 0;
+			} else if (y == 2) {
+				document.getElementById("textBox").innerHTML = "There's a bench and some straw...hmmm those legs don't look too stable...I wonder...";
+				document.getElementById("textBox").style.color = "#35dd43";	
+				document.getElementById("next").type = "button";
+				if (clickedB == 1) {
+					document.getElementById("option3b2").type = "button";	
+					document.getElementById("textBox").innerHTML = "";
+					document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+					document.getElementById("next").type = "hidden";
+				}
+				clickedB = 1;
+			} else if (y ==3) {
+				document.getElementById("textBox").innerHTML = "So does that guy usually leave around this time";
+				document.getElementById("textBox").style.color = "#35dd43";
+				document.getElementById("next").type = "button";
+				
+				if (clickedC == 1) {
+					document.getElementById("textBox").innerHTML = "Yup everytime he gets up and leaves. I think it's his coffee break or something."
+					document.getElementById("textBox").style.color = "#4286f4";
+					y = 0;
+				}
+				
+				clickedC = 1;
+					
+			} else if (y == 4) {
+				document.getElementById("textBox").innerHTML = "Are you sure?";
+				document.getElementById("next").value= "Yes";
+				document.getElementById("next").type = "button";
+				document.getElementById("No").type = "button";
+				if (clickedD == 1) {
+					document.getElementById("No").type = "hidden";
+					document.getElementById("next").value = "Next";
+					document.getElementById("textBox").innerHTML = "Sleep until?";
+					document.getElementById("option3dtime").type = "time";
+					y = 5;
+				}
+				clickedD = 1;
+			} else if (y == 0 ) {
+				document.getElementById("textBox").innerHTML = "";
+				document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+				document.getElementById("next").type = "hidden";
+				document.getElementById("No").type = "hidden";
+				if (clickedA == 0) {
+					document.getElementById("option3a").type = "button";
+					document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+				}  
+				if (clickedB == 0) {
+					document.getElementById("option3b").type = "button";
+					document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+				}  
+				if (clickedC == 0) {
+					document.getElementById("option3c").type = "button";
+					document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+				}  
+					document.getElementById("option3d").type = "button";
+					document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+				
+				
+				
+			} else if (y == 5) {
+
+				var time = document.getElementById("option3dtime").value;
+				if (time == "12:00") {
+					puzzleSolved = 1;
+					document.getElementById("option3dtime").type = "hidden";
+					document.getElementById("textBox").innerHTML = "";
+					document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+					document.getElementById("next").type = "hidden";
+					dayCounter++;
+					document.getElementById("Days").innerHTML = "Day " + dayCounter;
+					days ();
+					x++;
+					y = 0;
+				} else {
+					document.getElementById("option3dtime").type = "hidden";
+					document.getElementById("textBox").innerHTML = "";
+					document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+					document.getElementById("next").type = "hidden";
+					dayCounter++;
+					document.getElementById("Days").innerHTML = "Day " + dayCounter;
+					days ();
+					x++;
+					y = 0;
+				}
+				
+				
+			} 
+				
+		} else if (x >= 10) {
+			document.getElementById("next").value = "Next";
+			act2 ();
+			
+		}
+		
+		
+	}
+	
+	
+	function interaction3reset () {	
+	document.getElementById("textBox").setAttribute("style" , "visibility:visible");
+		document.getElementById("textBox").innerHTML = name + " waits until the guard leaves";
+		document.getElementById("textBox").style.fontStyle = "italic";
+		
+			if (x == 8) {
+					y = 0;
+					clickedA = 0;
+					clickedB = 0;
+					clickedC = 0;
+					clickedD = 0;
+					interaction3 ();
+			}
+			
+			x = 8;
+	}
+	
+	
+	function interaction3harvested () {
+		document.getElementById("textBox").setAttribute("style" , "visibility:visible");
+		document.getElementById("option3b2").type = "hidden";
+		document.getElementById("textBox").innerHTML = name + " got 2 wooden sticks and some straw!";	
+		document.getElementById("textBox").style.fontStyle = "italic";
+		
+		//sessionstorage stuff
+		document.getElementById("next").type = "button";
+		y = 0;
+		
+	}
+	
+	
+	function act2 () {
+	document.getElementById("textBox").setAttribute("style" , "visibility:visible");
+		if (x == 10) {
+			if (puzzleSolved == 1) {
+					if (z == 0) {
+				document.getElementById("textBox").innerHTML = name + " looks around the room and notices that there is no guard watching the cells. He must be on his coffee break.";
+				document.getElementById("textBox").style.fontStyle = "italic";
+						z++;
+					}
+					if (clickedB == 0) {
+							document.getElementById("next").type = "hidden";
+							document.getElementById("option3b").type = "button";
+							if (y == 2) {
+									document.getElementById("option3b").type = "hidden";
+									document.getElementById("textBox").innerHTML = "There's a bench and some straw...hmmm those legs don't look too stable...I wonder...";	
+									document.getElementById("textBox").style.fontStyle = "italic";
+									document.getElementById("next").type = "button";
+							}
+						if (y == 3) {
+							document.getElementById("option3b").type = "hidden";
+							document.getElementById("option3b2").type = "button";	
+							document.getElementById("textBox").innerHTML = "";
+							document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+							document.getElementById("next").type = "hidden";
+							clickedB = 1;
+						}
+						y = 3;
+						
+					} else {
+						
+						document.getElementById("option3b2").type = "hidden";
+						document.getElementById("option4").type = "button";	
+						document.getElementById("next").type = "hidden";
+						x++;
+						
+					}
+			
+			} else if (puzzleSolved == 0) {
+				document.getElementById("textBox").innerHTML = name + " looks around the room and notices that there is a guard. " + name + " can't do anything suspicious."	
+				document.getElementById("textBox").style.fontStyle = "italic";
+				if (y == 1) {
+					x = 7;
+
+					interaction3reset ();
+				}
+				
+			y = 1;
+			}
+		
+			
+		} else if (x == 11) {
+			document.getElementById("textBox").innerHTML = name + " combined the sticks using the straw to make a long rod.";
+			document.getElementById("textBox").style.fontStyle = "italic";
+			document.getElementById("option4").value = "Reach out and retrieve the keys";
+			x++;
+		} else if (x == 12) {
+			document.getElementById("option4").type = "hidden";
+			document.getElementById("textBox").innerHTML = name + " acquired the keys to the cells.";
+			document.getElementById("textBox").style.fontStyle = "italic";
+			document.getElementById("next").type = "button"; 
+			x++;	
+		} else if (x == 13) {
+			document.getElementById("textBox").innerHTML = "*The guard walks back into the brig*";
+			document.getElementById("textBox").style.fontStyle = "italic";
+			document.getElementById("option3d").type = "button";
+			document.getElementById("next").type = "hidden";
+				if (y ==4) {
+						document.getElementById("option3d").type = "hidden";
+						document.getElementById("textBox").innerHTML = "";
+						document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+						dayCounter++;
+						document.getElementById("Days").innerHTML = "Day " + dayCounter;
+						x++;
+						days ();
+						
+				}
+				
+				y = 4;
+				
+		} else if (x == 14) {
+				window.location = "SecondLevel.html";
+		}
+	}
+	
+	
+	
+	
+	
+	</script>
+</html>

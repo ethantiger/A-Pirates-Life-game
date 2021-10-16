@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8" />
+    <title> Fourth Level </title>
+    
+    
+    <link rel="stylesheet" href="css/browser_reset.css" type="text/css" >
+     <link rel="stylesheet" href="css/main.css" type="text/css"> 
+    
+</head>
+
+<body id="body5">
+<h1 id="location"> </h1>
+<p id="textBox"> </p>
+
+
+
+
+
+
+
+
+<form name="Interactions" id="Interactions" method="post">
+<input type="hidden" id="option1" name="choice1" onclick="lastAct ();" value="Light up firecrackers">
+<input type="hidden" id="finalSlice" name="choice2" onclick="lastAct ();" value= "Finish off the Captain">
+
+
+<p> <input type="hidden" id="next" value="Next" onClick="lastAct ();"> </p>
+<p> <input type="hidden" id="next2" value="Next" onClick="passCodeCheck ();"> </p>
+<p> <input type="hidden" id="next3" value="Start" onClick="captainBattle ();"> </p>
+<table id="passCode" style="visibility:hidden">
+<tr class="table1">
+	<td id="passLock1" class="table1"> </td>
+    <td id="passLock2" class="table1"> </td>
+    <td id="passLock3" class="table1"> </td>
+    <td id="passLock4" class="table1"> </td>
+    <td id="passLock5" class="table1"> </td>
+    <td id="passLock6" class="table1"> </td>
+</tr>
+<table id="playerMove2">
+<tr>
+<td> <input type="hidden" id="up" name="playerMovement" onClick="upPressed=1;passCodeCheck ();" value="Up"> </td>
+<td> <input type="hidden" id="down" name="playerMovement" onClick="downPressed=1;passCodeCheck ();" value="Down"> </td>
+<td> <input type="hidden" id="right" name="playerMovement" onClick="rightPressed=1;passCodeCheck ();" value="Right"> </td>
+<td> <input type="hidden" id="left" name="playerMovement" onClick="leftPressed=1;passCodeCheck ();" value="Left"></td>
+</tr>
+</table>
+
+
+</table>
+
+
+
+<table id="battle" style="visibility:hidden">
+<tr class="table1">
+	<td id="path16" class="table1"> 16</td>
+    <td id="captain" class="table1">Captain</td>
+    <td id="path15" class="table1">15 </td>
+</tr>
+
+<tr>
+	<td id="path12" class="table1">12 </td>
+    <td id="path13" class="table1">13 </td>
+    <td id="path14" class="table1">14 </td>
+</tr>
+
+<tr>
+	<td id="path9" class="table1">9 </td>
+    <td id="path10" class="table1"> 10</td>
+    <td id="path11" class="table1">11 </td>
+</tr>
+
+<tr>
+	<td id="path6" class="table1"> 6</td>
+    <td id="path7" class="table1"> 7</td>
+    <td id="path8" class="table1">8 </td>
+</tr>
+
+<tr>
+	<td id="path5" class="table1">5 </td>
+    <td id="path3" class="table1">3 </td>
+    <td id="path4" class="table1">4 </td>
+</tr>
+
+<tr>
+	<td id="path2" class="table1"> 2</td>
+    <td id="start" class="table1">Start</td>
+    <td id="path1" class="table1"> 1</td>
+</tr>
+
+
+
+
+
+
+
+
+
+</table>
+
+<table id="playerMove">
+<tr>
+
+<td> <input type="hidden" id="left2" name="playerMovement2" onClick="xco--;captainBattle ();" value="Left"></td>
+
+<td> <input type="hidden" id="right2" name="playerMovement2" onClick="xco++;captainBattle ();" value="Right"></td>
+</tr>
+</table>
+
+</form>
+
+
+</body>
+<script>
+var x = 0;
+var y = 0;
+var z = 0;
+var upPressed = 0;
+var downPressed = 0;
+var leftPressed = 0;
+var rightPressed = 0;
+var xco = 2;
+var yco = 1;
+var shot1 = 0;
+var shot2 = 0;
+var shot3 = 0;
+var die1 = 0;
+var die2 = 0;
+var die3 = 0;
+
+
+ var name = sessionStorage.getItem("uname");	
+ var playerChoice = sessionStorage.getItem("choice");
+ var sword = sessionStorage.getItem("item1");
+
+
+
+
+function locationShow () {
+
+	 window.setTimeout(fadein1, 2000);
+	
+
+	function fadein1() {
+  document.getElementById("location").style.opacity = '1';
+  
+	window.setTimeout(fadeout1, 4000);
+}
+	function fadeout1 () {
+		
+	document.getElementById("location").style.opacity = '0';
+	
+	
+	window.setTimeout(buttonShow, 2000);
+	
+	}
+
+
+	}
+	
+	
+	function buttonShow () {
+	document.getElementById("next").value = "Enter";	
+	document.getElementById("next").type = "button";
+	document.getElementById("location").innerHTML = "";	
+	}
+
+
+	window.onload = lastAct ();
+			
+function lastAct () {
+document.getElementById("textBox").setAttribute("style" , "visibility:visible");
+	if (x == 0) {
+	document.getElementById("textBox").setAttribute("style" , "visibility:visible");
+		if (playerChoice == 1) {
+			document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+			document.getElementById("passCode").innerHTML = "";
+			document.getElementById("next").type = "hidden";
+			document.getElementById("option1").type = "button";
+			x++;
+		} else if (playerChoice == 2) {
+			document.getElementById("battle").innerHTML = "";
+			document.getElementById("playerMove").innerHTML = "";
+			document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+			document.getElementById("next").type = "hidden";
+			document.getElementById("option1").value = "Go to the rowboat";
+			document.getElementById("option1").type = "button";
+			x++;
+		}
+		
+	} else if (x == 1) {
+		if (playerChoice == 1) {
+			document.getElementById("option1").type = "hidden";
+			document.getElementById("textBox").innerHTML = name + " lights up the firecrackers and throws them out onto the deck. All the pirates look in the direction of the flashing lights.";
+			document.getElementById("textBox").style.fontStyle = "italic";
+			document.getElementById("next").type = "button";
+			x++;
+		} else if (playerChoice == 2) {
+			document.getElementById("option1").type = "hidden";
+			document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+			document.getElementById("location").innerHTML = "The StarBoard";
+			x++;
+			locationShow ();
+		}
+		
+	} else if (x == 2) {
+		if (playerChoice == 1) {
+			document.getElementById("textBox").innerHTML = "The former crew and captain creep out of the brig and enter the storage room.";
+			document.getElementById("textBox").style.fontStyle = "italic";
+			x++;
+		} else if (playerChoice == 2) {
+			document.getElementById("textBox").innerHTML = name + " walks up to the rowboat and begins to enter the password.";
+			document.getElementById("textBox").style.fontStyle = "italic";
+			document.getElementById("next").value = "Next";
+			x++;
+		}	
+	} else if (x == 3) {
+		if (playerChoice == 1) {
+			document.getElementById("textBox").innerHTML = "They then immediately retaliate and battle begins.";
+			document.getElementById("textBox").style.fontStyle = "italic";
+			x++;
+		} else if (playerChoice == 2) {
+			document.getElementById("next").value = "Next";
+			document.getElementById("textBox").innerHTML = "";
+			document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+			document.getElementById("next").type = "hidden";
+			document.getElementById("passCode").setAttribute("style", "visibility:visible");
+				document.getElementById("up").type = "button";
+				document.getElementById("down").type = "button";
+				document.getElementById("left").type = "button";
+				document.getElementById("right").type = "button";
+		}
+	} else if (x == 4) {
+		if (playerChoice == 1) {
+			document.getElementById("textBox").innerHTML = name + " draws his sword and targets the captain.";
+			document.getElementById("textBox").style.fontStyle = "italic";
+			x++;
+		} else if (playerChoice == 2) {
+				document.getElementById("passCode").setAttribute("style", "visibility:hidden");
+				document.getElementById("textBox").innerHTML = "The lock on the row boat came off. " + name + " enters and lowers the boat without getting caught. He is now finally free.";
+				document.getElementById("textBox").style.fontStyle = "italic"
+				x++;
+		}
+	} else if (x == 5) {
+				if (playerChoice == 1) {
+			captainBattle ();
+		} else if (playerChoice == 2) {
+			document.getElementById("textBox").innerHTML = "";
+			document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+			document.getElementById("next").type = "hidden";
+			document.getElementById("location").innerHTML = "THE END";
+			x++;
+			locationShow ();
+		} 
+
+		
+	} else if (x == 6) {
+		if (playerChoice == 1) {
+			document.getElementById("finalSlice").type = "button";
+			document.getElementById("textBox").innerHTML = "";
+			document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+			document.getElementById("next").type = "hidden";
+			x++;
+		} else if (playerChoice == 2) {
+		document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+			document.getElementById("next").value = "Back to Main Menu";
+			x++;
+		}
+	
+	} else if (x == 7) {
+		if (playerChoice == 1) {
+			document.getElementById("next").type = "button";
+			document.getElementById("finalSlice").type = "hidden";
+				if (sword == 1) {
+			document.getElementById("textBox").innerHTML = name + " used the sword to finish off the pirate captain.";
+			document.getElementById("textBox").style.fontStyle = "italic";
+			
+				} else {
+			document.getElementById("textBox").innerHTML = name + " used the long rod to incapacitate the pirate captain.";
+			document.getElementById("textBox").style.fontStyle = "italic";
+				}
+			x++;
+		} else if (playerChoice == 2) {
+			window.location = "StartPage.html";
+		
+		}
+	
+	} else if (x == 8) {
+		document.getElementById("textBox").innerHTML = "The former captain and the former crew regained their rightful place on the ship. " + name + " now sails along with the rescued crew.";
+		document.getElementById("textBox").style.fontStyle = "italic";
+		x++;
+	} else if (x == 9) {
+		if (sword == 1) {
+			document.getElementById("textBox").innerHTML = "The pirates have been forced the walk the plank as the captain was slain by " + name + "'s sword.";
+			document.getElementById("textBox").style.fontStyle = "italic";
+		} else {
+			document.getElementById("textBox").innerHTML = "The pirates along with the captain have been placed in the brig. They have been spared by the graciousness of " + name + ".";
+			document.getElementById("textBox").style.fontStyle = "italic";
+		}
+		x++;
+	} else if (x == 10) {
+			document.getElementById("textBox").innerHTML = "";
+			document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+			document.getElementById("next").type = "hidden";
+			document.getElementById("location").innerHTML = "THE END";
+			x++;
+			locationShow ();
+	} else if (x == 11) {
+		document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+		document.getElementById("next").value = "Back to Main Menu";
+		x++;
+	} else if (x == 12) {
+		window.location = "StartPage.html";
+	}
+		
+	
+}
+
+
+
+function captainBattle () {
+	document.getElementById("textBox").setAttribute("style" , "visibility:visible");
+	document.getElementById("battle").setAttribute("style", "visibility:visible");
+	
+	document.getElementById("next").type = "hidden";
+	
+if (y == 0) {
+	document.getElementById("start").style.backgroundColor = "#00FF33";
+	document.getElementById("captain").style.backgroundColor = "red";
+	document.getElementById("textBox").innerHTML = "The captain is shooting at you. Orange means targetting. Blue means bullet. Your goal is to reach him and strike him down. You can strafe left or right to dodge the bullets.";
+	document.getElementById("textBox").style.fontStyle = "italic";
+	document.getElementById("next3").type = "button";
+} else if (y == 1) {
+	document.getElementById("textBox").innerHTML = "";
+	document.getElementById("textBox").setAttribute("style" , "visibility:visible");
+	document.getElementById("next3").type = "hidden";
+	document.getElementById("left2").type = "button";
+	document.getElementById("right2").type = "button";
+	
+				document.getElementById("path2").style.backgroundColor = "white";
+				document.getElementById("path5").style.backgroundColor = "white";
+				document.getElementById("path6").style.backgroundColor = "white";
+				document.getElementById("path9").style.backgroundColor = "white";
+				document.getElementById("path12").style.backgroundColor = "white";
+				document.getElementById("path16").style.backgroundColor = "white";	 
+				document.getElementById("start").style.backgroundColor = "white";
+				document.getElementById("path3").style.backgroundColor = "white";
+				document.getElementById("path7").style.backgroundColor = "white";
+				document.getElementById("path10").style.backgroundColor = "white";
+				document.getElementById("path13").style.backgroundColor = "white";
+				document.getElementById("path1").style.backgroundColor = "white";
+				document.getElementById("path4").style.backgroundColor = "white";
+				document.getElementById("path8").style.backgroundColor = "white";
+				document.getElementById("path11").style.backgroundColor = "white";
+				document.getElementById("path14").style.backgroundColor = "white";
+				document.getElementById("path15").style.backgroundColor = "white";
+	var randomNumber = Math.floor(Math.random() * 3);
+
+
+
+			if (shot1 == 1) {
+				document.getElementById("path2").style.backgroundColor = "blue";
+				document.getElementById("path5").style.backgroundColor = "blue";
+				document.getElementById("path6").style.backgroundColor = "blue";
+				document.getElementById("path9").style.backgroundColor = "blue";
+				document.getElementById("path12").style.backgroundColor = "blue";
+				document.getElementById("path16").style.backgroundColor = "blue";
+				shot1 = 0;
+				die1 = 1;
+				
+			} else if (shot2 == 1) {
+				document.getElementById("start").style.backgroundColor = "blue";
+				document.getElementById("path3").style.backgroundColor = "blue";
+				document.getElementById("path7").style.backgroundColor = "blue";
+				document.getElementById("path10").style.backgroundColor = "blue";
+				document.getElementById("path13").style.backgroundColor = "blue";
+				shot2 = 0;
+				die2 = 1;
+			} else if (shot3 == 1) {
+				document.getElementById("path1").style.backgroundColor = "blue";
+				document.getElementById("path4").style.backgroundColor = "blue";
+				document.getElementById("path8").style.backgroundColor = "blue";
+				document.getElementById("path11").style.backgroundColor = "blue";
+				document.getElementById("path14").style.backgroundColor = "blue";
+				document.getElementById("path15").style.backgroundColor = "blue";
+				shot3 = 0;
+				die3 = 1;
+		 }
+
+	 if (randomNumber == 0) {
+			if (shot1 == 0) {
+				document.getElementById("path2").style.backgroundColor = "orange";
+				document.getElementById("path5").style.backgroundColor = "orange";
+				document.getElementById("path6").style.backgroundColor = "orange";
+				document.getElementById("path9").style.backgroundColor = "orange";
+				document.getElementById("path12").style.backgroundColor = "orange";
+				document.getElementById("path16").style.backgroundColor = "orange";	 
+				shot1 = 1;
+			}
+	 } else if (randomNumber == 1) {
+		 if (shot2 == 0) {
+				document.getElementById("start").style.backgroundColor = "orange";
+				document.getElementById("path3").style.backgroundColor = "orange";
+				document.getElementById("path7").style.backgroundColor = "orange";
+				document.getElementById("path10").style.backgroundColor = "orange";
+				document.getElementById("path13").style.backgroundColor = "orange";
+				shot2 = 1;
+		 }
+	 } else if (randomNumber == 2) {
+		 if (shot3 == 0) {
+				document.getElementById("path1").style.backgroundColor = "orange";
+				document.getElementById("path4").style.backgroundColor = "orange";
+				document.getElementById("path8").style.backgroundColor = "orange";
+				document.getElementById("path11").style.backgroundColor = "orange";
+				document.getElementById("path14").style.backgroundColor = "orange";
+				document.getElementById("path15").style.backgroundColor = "orange";
+				shot3 = 1;
+		 }
+	 }
+	
+	 if (xco == 2 && yco == 1) {
+		document.getElementById("start").style.backgroundColor = "#00FF33";
+	 } else if (xco == 3 && yco == 2) {
+		 document.getElementById("path4").style.backgroundColor = "#00FF33";
+		 	if (die3 == 1) {
+				
+				document.getElementById("textBox").innerHTML = "You got hit";
+				document.getElementById("left2").type = "hidden";
+				document.getElementById("right2").type = "hidden";
+				document.getElementById("next3").value = "Retry";
+				document.getElementById("next3").type = "button";
+				if (z == 0) {
+					xco = 2;
+					yco = 0;
+					shot1 = 0;
+					shot2 = 0;
+					shot3 = 0;
+					die1 = 0;
+					die2 = 0;
+					die3 = 0;
+				}
+				
+				z = 1;
+					
+			}
+	 } else if (xco == 2 && yco == 2) {
+	 	 document.getElementById("path3").style.backgroundColor = "#00FF33";
+		 	if (die2 == 1) {
+				document.getElementById("textBox").innerHTML = "You got hit";
+				document.getElementById("left2").type = "hidden";
+				document.getElementById("right2").type = "hidden";
+				document.getElementById("next3").value = "Retry";
+				document.getElementById("next3").type = "button";
+				if (z == 0) {
+					xco = 2;
+					yco = 0;
+					shot1 = 0;
+					shot2 = 0;
+					shot3 = 0;
+					die1 = 0;
+					die2 = 0;
+					die3 = 0;
+				}
+				
+				z = 1;
+			}
+	 } else if (xco == 1 && yco == 2) {
+		 document.getElementById("path5").style.backgroundColor = "#00FF33";
+		 	if (die1 == 1) {
+				document.getElementById("textBox").innerHTML = "You got hit";
+				document.getElementById("left2").type = "hidden";
+				document.getElementById("right2").type = "hidden";
+				document.getElementById("next3").value = "Retry";
+				document.getElementById("next3").type = "button";
+				if (z == 0) {
+					xco = 2;
+					yco = 0;
+					shot1 = 0;
+					shot2 = 0;
+					shot3 = 0;
+					die1 = 0;
+					die2 = 0;
+					die3 = 0;
+				}
+				
+				z = 1;
+			}
+	 } else if (xco == 2 && yco == 3) {
+		 document.getElementById("path7").style.backgroundColor = "#00FF33";
+		 	if (die2 == 1) {
+				document.getElementById("textBox").innerHTML = "You got hit";
+				document.getElementById("left2").type = "hidden";
+				document.getElementById("right2").type = "hidden";
+				document.getElementById("next3").value = "Retry";
+				document.getElementById("next3").type = "button";
+				if (z == 0) {
+					xco = 2;
+					yco = 0;
+					shot1 = 0;
+					shot2 = 0;
+					shot3 = 0;
+					die1 = 0;
+					die2 = 0;
+					die3 = 0;
+				}
+				
+				z = 1;
+			}
+	 } else if (xco == 3 && yco == 3) {
+		 document.getElementById("path8").style.backgroundColor = "#00FF33";
+		 	if (die3 == 1) {
+				document.getElementById("textBox").innerHTML = "You got hit";
+				document.getElementById("left2").type = "hidden";
+				document.getElementById("right2").type = "hidden";
+				document.getElementById("next3").value = "Retry";
+				document.getElementById("next3").type = "button";
+				if (z == 0) {
+					xco = 2;
+					yco = 0;
+					shot1 = 0;
+					shot2 = 0;
+					shot3 = 0;
+					die1 = 0;
+					die2 = 0;
+					die3 = 0;
+				}
+				
+				z = 1;
+			}
+	 } else if (xco == 1 && yco == 3) {
+		 document.getElementById("path6").style.backgroundColor = "#00FF33";
+		 	if (die1 == 1) {
+				document.getElementById("textBox").innerHTML = "You got hit";
+				document.getElementById("left2").type = "hidden";
+				document.getElementById("right2").type = "hidden";
+				document.getElementById("next3").value = "Retry";
+				document.getElementById("next3").type = "button";
+				if (z == 0) {
+					xco = 2;
+					yco = 0;
+					shot1 = 0;
+					shot2 = 0;
+					shot3 = 0;
+					die1 = 0;
+					die2 = 0;
+					die3 = 0;
+				}
+				
+				z = 1;
+			}
+	 } else if (xco == 1 && yco == 4) {
+		 document.getElementById("path9").style.backgroundColor = "#00FF33";
+		 	if (die1 == 1) {
+				document.getElementById("textBox").innerHTML = "You got hit";
+				document.getElementById("left2").type = "hidden";
+				document.getElementById("right2").type = "hidden";
+				document.getElementById("next3").value = "Retry";
+				document.getElementById("next3").type = "button";
+				if (z == 0) {
+					xco = 2;
+					yco = 0;
+					shot1 = 0;
+					shot2 = 0;
+					shot3 = 0;
+					die1 = 0;
+					die2 = 0;
+					die3 = 0;
+				}
+				
+				z = 1;
+			}
+	 } else if (xco == 2 && yco == 4) {
+		 document.getElementById("path10").style.backgroundColor = "#00FF33";
+		 	if (die2 == 1) {
+				document.getElementById("textBox").innerHTML = "You got hit";
+				document.getElementById("left2").type = "hidden";
+				document.getElementById("right2").type = "hidden";
+				document.getElementById("next3").value = "Retry";
+				document.getElementById("next3").type = "button";
+				if (z == 0) {
+					xco = 2;
+					yco = 0;
+					shot1 = 0;
+					shot2 = 0;
+					shot3 = 0;
+					die1 = 0;
+					die2 = 0;
+					die3 = 0;
+				}
+				
+				z = 1;
+			}
+	 } else if (xco == 3 && yco == 4) {
+		 document.getElementById("path11").style.backgroundColor = "#00FF33";
+		 		 	if (die3 == 1) {
+				document.getElementById("textBox").innerHTML = "You got hit";
+				document.getElementById("left2").type = "hidden";
+				document.getElementById("right2").type = "hidden";
+				document.getElementById("next3").value = "Retry";
+				document.getElementById("next3").type = "button";
+				if (z == 0) {
+					xco = 2;
+					yco = 0;
+					shot1 = 0;
+					shot2 = 0;
+					shot3 = 0;
+					die1 = 0;
+					die2 = 0;
+					die3 = 0;
+				}
+				
+				z = 1;
+			}
+	 } else if (xco == 1 && yco == 5) {
+		 document.getElementById("path12").style.backgroundColor = "#00FF33";
+		 	if (die1 == 1) {
+				document.getElementById("textBox").innerHTML = "You got hit";
+				document.getElementById("left2").type = "hidden";
+				document.getElementById("right2").type = "hidden";
+				document.getElementById("next3").value = "Retry";
+				document.getElementById("next3").type = "button";
+				if (z == 0) {
+					xco = 2;
+					yco = 0;
+					shot1 = 0;
+					shot2 = 0;
+					shot3 = 0;
+					die1 = 0;
+					die2 = 0;
+					die3 = 0;
+				}
+				
+				z = 1;
+			}
+	 } else if (xco == 2 && yco == 5) {
+		 document.getElementById("path13").style.backgroundColor = "#00FF33";
+		 	if (die2 == 1) {
+				document.getElementById("textBox").innerHTML = "You got hit";
+				document.getElementById("left2").type = "hidden";
+				document.getElementById("right2").type = "hidden";
+				document.getElementById("next3").value = "Retry";
+				document.getElementById("next3").type = "button";
+				if (z == 0) {
+					xco = 2;
+					yco = 0;
+					shot1 = 0;
+					shot2 = 0;
+					shot3 = 0;
+					die1 = 0;
+					die2 = 0;
+					die3 = 0;
+					
+				}
+				
+				z = 1;
+			}
+	 } else if (xco == 3 && yco == 5) {
+		 document.getElementById("path14").style.backgroundColor = "#00FF33";
+		 	if (die3 == 1) {
+				document.getElementById("textBox").innerHTML = "You got hit";
+				document.getElementById("left2").type = "hidden";
+				document.getElementById("right2").type = "hidden";
+				document.getElementById("next3").value = "Retry";
+				document.getElementById("next3").type = "button";
+				if (z == 0) {
+					xco = 2;
+					yco = 0;
+					shot1 = 0;
+					shot2 = 0;
+					shot3 = 0;
+					die1 = 0;
+					die2 = 0;
+					die3 = 0;
+				}
+				
+				z = 1;
+			}
+	 } else if (xco == 1 && yco == 6) {
+		 document.getElementById("path16").style.backgroundColor = "#00FF33";
+		 	if (die1 == 1) {
+				document.getElementById("textBox").innerHTML = "You got hit";
+				document.getElementById("left2").type = "hidden";
+				document.getElementById("right2").type = "hidden";
+				document.getElementById("next3").value = "Retry";
+				document.getElementById("next3").type = "button";
+				if (z == 0) {
+					xco = 2;
+					yco = 0;
+					shot1 = 0;
+					shot2 = 0;
+					shot3 = 0;
+					die1 = 0;
+					die2 = 0;
+					die3 = 0;
+				}
+				
+				z = 1;
+			}
+		 yco--;
+	 } else if (xco == 2 && yco == 6) {
+		 document.getElementById("captain").style.backgroundColor = "#00FF33";
+		 yco--;
+		 x++;
+		 document.getElementById("textBox").innerHTML = name + " reached the captain!!"
+		 document.getElementById("textBox").style.fontStyle = "italic";
+		 document.getElementById("battle").setAttribute("style", "visibility:hidden");
+		 document.getElementById("left2").type = "hidden";
+		 document.getElementById("right2").type = "hidden";
+		 document.getElementById("next").type = "button";
+	 } else if (xco == 3 && yco == 6) {
+		 document.getElementById("path15").style.backgroundColor = "#00FF33";
+		 	if (die3 == 1) {
+				document.getElementById("textBox").innerHTML = "You got hit";
+				document.getElementById("left2").type = "hidden";
+				document.getElementById("right2").type = "hidden";
+				document.getElementById("next3").value = "Retry";
+				document.getElementById("next3").type = "button";
+				if (z == 0) {
+					xco = 2;
+					yco = 0;
+					shot1 = 0;
+					shot2 = 0;
+					shot3 = 0;
+					die1 = 0;
+					die2 = 0;
+					die3 = 0;
+				}
+				
+				z = 1;
+			}
+		 yco--;
+	 } else if (xco == 0) {
+			xco = 1;
+			if (yco == 2) {
+				document.getElementById("path5").style.backgroundColor = "#00FF33";
+			} else if (yco == 3) {
+				document.getElementById("path6").style.backgroundColor = "#00FF33";
+			} else if (yco == 4) {
+				document.getElementById("path9").style.backgroundColor = "#00FF33";
+			} else if (yco == 5) {
+				document.getElementById("path12").style.backgroundColor = "#00FF33";
+			} else if (yco == 6) {
+				document.getElementById("path16").style.backgroundColor = "#00FF33";
+				yco--;
+			}
+	 } else if (xco == 4) {
+			xco = 3; 
+			if (yco == 2) {
+				document.getElementById("path4").style.backgroundColor = "#00FF33";
+			} else if (yco == 3) {
+				document.getElementById("path8").style.backgroundColor = "#00FF33";
+			} else if (yco == 4) {
+				document.getElementById("path11").style.backgroundColor = "#00FF33";
+			} else if (yco == 5) {
+				document.getElementById("path14").style.backgroundColor = "#00FF33";
+			} else if (yco == 6) {
+				document.getElementById("path15").style.backgroundColor = "#00FF33";
+				yco--;
+			}
+			
+	 } 
+	 
+	 yco++;
+	 				die1 = 0;
+					die2 = 0;
+					die3 = 0;
+					z = 0;
+}
+
+y = 1;
+}
+
+
+
+
+
+
+
+
+function passCodeCheck () {
+	if (z == 0) {
+	
+		if (upPressed == 1) {
+				document.getElementById("passLock1").innerHTML = "UP";
+		} else if (downPressed == 1) {
+				document.getElementById("passLock1").innerHTML = "DOWN";
+		} else if (leftPressed == 1) {
+				document.getElementById("passLock1").innerHTML = "LEFT";
+		} else if (rightPressed == 1) {
+				document.getElementById("passLock1").innerHTML = "RIGHT";
+		}
+	
+	upPressed = 0;
+	downPressed = 0;
+	leftPressed = 0;
+	rightPressed = 0;
+	z++;
+	} else if (z == 1) {
+		
+		if (upPressed == 1) {
+				document.getElementById("passLock2").innerHTML = "UP";
+		} else if (downPressed == 1) {
+				document.getElementById("passLock2").innerHTML = "DOWN";
+		} else if (leftPressed == 1) {
+				document.getElementById("passLock2").innerHTML = "LEFT";
+		} else if (rightPressed == 1) {
+				document.getElementById("passLock2").innerHTML = "RIGHT";
+		}
+	
+	upPressed = 0;
+	downPressed = 0;
+	leftPressed = 0;
+	rightPressed = 0;
+	z++;
+		
+	} else if (z == 2) {
+		
+		if (upPressed == 1) {
+				document.getElementById("passLock3").innerHTML = "UP";
+		} else if (downPressed == 1) {
+				document.getElementById("passLock3").innerHTML = "DOWN";
+		} else if (leftPressed == 1) {
+				document.getElementById("passLock3").innerHTML = "LEFT";
+		} else if (rightPressed == 1) {
+				document.getElementById("passLock3").innerHTML = "RIGHT";
+		}
+	
+	upPressed = 0;
+	downPressed = 0;
+	leftPressed = 0;
+	rightPressed = 0;
+	z++;
+		
+	} else if (z == 3) {
+		
+		if (upPressed == 1) {
+				document.getElementById("passLock4").innerHTML = "UP";
+				
+		} else if (downPressed == 1) {
+				document.getElementById("passLock4").innerHTML = "DOWN";
+		} else if (leftPressed == 1) {
+				document.getElementById("passLock4").innerHTML = "LEFT";
+		} else if (rightPressed == 1) {
+				document.getElementById("passLock4").innerHTML = "RIGHT";
+		}
+	
+	upPressed = 0;
+	downPressed = 0;
+	leftPressed = 0;
+	rightPressed = 0;
+	z++;
+		
+	} else if (z == 4) {
+		
+		if (upPressed == 1) {
+				document.getElementById("passLock5").innerHTML = "UP";
+		} else if (downPressed == 1) {
+				document.getElementById("passLock5").innerHTML = "DOWN";
+		} else if (leftPressed == 1) {
+				document.getElementById("passLock5").innerHTML = "LEFT";
+		} else if (rightPressed == 1) {
+				document.getElementById("passLock5").innerHTML = "RIGHT";
+		}
+	
+	upPressed = 0;
+	downPressed = 0;
+	leftPressed = 0;
+	rightPressed = 0;
+	z++;
+		
+	} else if (z == 5) {
+		
+		if (upPressed == 1) {
+				document.getElementById("passLock6").innerHTML = "UP";
+		} else if (downPressed == 1) {
+				document.getElementById("passLock6").innerHTML = "DOWN";
+		} else if (leftPressed == 1) {
+				document.getElementById("passLock6").innerHTML = "LEFT";
+		} else if (rightPressed == 1) {
+				document.getElementById("passLock6").innerHTML = "RIGHT";
+		}
+	
+	upPressed = 0;
+	downPressed = 0;
+	leftPressed = 0;
+	rightPressed = 0;
+				document.getElementById("up").type = "hidden";
+				document.getElementById("down").type = "hidden";
+				document.getElementById("left").type = "hidden";
+				document.getElementById("right").type = "hidden";
+				document.getElementById("next2").type = "button";
+	z++;
+		
+	} else if (z == 6) {
+		document.getElementById("next2").type = "hidden";
+		document.getElementById("next").type = "button";
+		if (document.getElementById("passLock1").innerHTML == "UP" && document.getElementById("passLock2").innerHTML == "DOWN" && document.getElementById("passLock3").innerHTML == "DOWN" && document.getElementById("passLock4").innerHTML == "UP" && document.getElementById("passLock5").innerHTML == "LEFT" && document.getElementById("passLock6").innerHTML == "RIGHT") {
+				x++;
+				z = 0;
+				document.getElementById("textBox").setAttribute("style", "visibility:visible");
+				document.getElementById("textBox").innerHTML = "You solved the puzzle!!"
+				document.getElementById("textBox").style.fontStyle = "italic";
+		} else {
+			document.getElementById("textBox").setAttribute("style", "visibility:visible");
+			document.getElementById("textBox").innerHTML = "Incorrect password. Think back to the storage room.";
+			document.getElementById("textBox").style.fontStyle = "italic";
+			document.getElementById("next").value = "Retry";
+			x = 3;
+			z = 0;	
+			document.getElementById("passLock1").innerHTML = "";
+			document.getElementById("passLock2").innerHTML = "";
+			document.getElementById("passLock3").innerHTML = "";
+			document.getElementById("passLock4").innerHTML = "";
+			document.getElementById("passLock5").innerHTML = "";
+			document.getElementById("passLock6").innerHTML = "";
+		}
+		
+	}
+}
+
+
+
+
+
+</script>
+
+
+
+
+</html>

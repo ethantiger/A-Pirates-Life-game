@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8" />
+    <title> Third Level </title>
+    
+    <link rel="stylesheet" href="css/browser_reset.css" type="text/css" >
+     <link rel="stylesheet" href="css/main.css" type="text/css">
+    
+</head>
+
+<body id="body4">
+<h1 id="location"> </h1>
+<p id="textBox"> </p>
+
+
+
+
+<form name="Interactions" id="Interactions" method="post">
+<input type="hidden" id="option1" name="choice1" onclick="captainSequence ();" value="Look around the ship">
+<input type="hidden" id="option2a" name="choice2" onclick="y=1;puzzle2 ();" value="Go to crew sleeping area">
+<input type="hidden" id="option2ab" name="choice2" onclick="y=4;z=5;puzzle2 ();" value="Go back to the deck">
+<input type="hidden" id="option2b" name="choice2" onclick="y=2;puzzle2 ();" value="Go to storage area">
+<input type="hidden" id="option2c" name="choice2" onclick="y=3;puzzle2 ();" value="Go to lifeboat">
+<input type="hidden" id="option3" name="choice3" onclick="puzzle2 ();" value="Light up firecrackers">
+
+
+
+
+<p> <input type="hidden" id="next" value="Next" onClick="captainSequence ();"> </p>
+
+<table id="tablePuzzle" style="visibility:hidden"> 
+<tr class="table1"> 
+	<td id="path10" class="table1" > </td>
+    <td id="path9" class="table1"> </td>
+    <td id="path11"  class="table1"> </td>
+    <td id="path12" class="table1"> </td>
+    <td id="firecrackers" class="table1">!!! </td>
+</tr>    
+<tr>
+	<td id="kill" class="table1"> </td>
+    <td id="path8" class="table1" > </td>
+    <td id="kill" class="table1"> </td>
+    <td id="kill" class="table1"> </td>
+    <td id="kill" class="table1"></td>
+</tr>
+<tr> 
+	<td id="kill" class="table1"> </td>
+    <td id="path7" class="table1"> </td>
+    <td id="path5" class="table1" >  </td>
+    <td id="path6" class="table1">  </td>
+    <td id="sword" class="table1">!! </td>
+</tr>
+<tr>
+	<td id="kill" class="table1"></td>
+    <td id="kill" class="table1"> </td>
+    <td id="path4" class="table1">  </td>
+    <td id="kill" class="table1"> </td>
+    <td id="kill" class="table1"> </td> 
+</tr>
+<tr>
+	<td id="start" class="table1"> Start</td>
+    <td  id="path1"  class="table1">  </td>
+    <td id="path2" class="table1"> </td>
+    <td id="path3" class="table1"> </td>
+    <td id="kill" class="table1"> </td> 
+</tr>
+
+</table>
+<table id="playerMove">
+<tr>
+<td> <input type="hidden" id="up" name="playerMovement" onClick="yco++;puzzle2();" value="Up"> </td>
+<td> <input type="hidden" id="down" name="playerMovement" onClick="yco--;puzzle2();" value="Down"></td>
+<td> <input type="hidden" id="right" name="playerMovement" onClick="xco++;puzzle2();" value="Right"> </td>
+<td> <input type="hidden" id="left" name="playerMovement" onClick="xco--;puzzle2();" value="Left"> </td>
+</tr>
+</table>
+
+
+</form>
+
+</body>
+	<script>
+   var x = 0;
+   var y = 0;
+   var z = 0;
+   var clickedA = 0;
+   var clickedB = 0;
+   var clickedC =0;
+   var object1 = 0;
+   var object2 = 0;
+   
+   var xco = 1;
+   var yco = 1;
+   
+   var name = sessionStorage.getItem("uname");	
+   var playerChoice = sessionStorage.getItem("choice");
+   
+   
+   
+
+   
+   
+   
+   
+   
+   
+function locationShow () {
+
+	 window.setTimeout(fadein1, 2000); // 2000
+	
+
+	function fadein1() {
+  document.getElementById("location").style.opacity = '1';
+  
+	window.setTimeout(fadeout1, 4000); //4000
+}
+	function fadeout1 () {
+		
+	document.getElementById("location").style.opacity = '0';
+	
+	
+	window.setTimeout(buttonShow, 2000);   //2000
+	
+	}
+
+
+	}
+	
+	
+	function buttonShow () {
+	document.getElementById("next").value = "Enter";	
+	document.getElementById("next").type = "button";
+	document.getElementById("location").innerHTML = "";	
+	
+	}
+	
+	
+	window.onload = captainSequence ();
+	
+	function captainSequence () {
+		document.getElementById("textBox").setAttribute("style" , "visibility:visible");
+
+		if (x == 0) {
+			document.getElementById("next").value = "Next";
+			document.getElementById("next").type = "button";
+			document.getElementById("textBox").innerHTML = name + " steps outside and the captain is standing right in front of him.";
+			document.getElementById("textBox").style.fontStyle = "italic";
+		x++;
+		} else if (x == 1) {
+			document.getElementById("textBox").innerHTML = "ARGGG WHAT ARE YOU DOING OUT HERE";
+			document.getElementById("textBox").style.color = "#f44141";
+		x++;
+		} else if (x == 2) {
+			document.getElementById("textBox").innerHTML = name + " turns around slowly and faces the captain.";
+			document.getElementById("textBox").style.fontStyle = "italic";
+			x++;	
+		} else if (x == 3) {
+			document.getElementById("textBox").innerHTML = "...";
+			document.getElementById("textBox").style.color = "#35dd43";
+			x++;	
+		} else if (x == 4) {
+			document.getElementById("textBox").innerHTML = "...";
+			document.getElementById("textBox").style.color = "#f44141";
+			x++;	
+		} else if (x == 5) {
+			document.getElementById("textBox").innerHTML = "WHAT ARE YOU MUTE? GET BACK TO WORK, YOU JUST HAD YOUR COFFEE BREAK";
+			document.getElementById("textBox").style.color = "#f44141";
+			x++;	
+		} else if (x == 6) {
+			document.getElementById("textBox").innerHTML = " *The disguise worked!!* ";
+			document.getElementById("textBox").style.fontStyle = "italic";
+			x++;	
+		} else if (x == 7) {
+			document.getElementById("textBox").innerHTML = "";
+			document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+			document.getElementById("next").type = "hidden";
+			document.getElementById("option1").type = "button";
+			x++;
+		} else if (x == 8) {
+			document.getElementById("textBox").innerHTML = name + " scans the ship and has somewhat of an understanding of his surroundings.";	
+			document.getElementById("textBox").style.fontStyle = "italic";
+			document.getElementById("next").type = "button";
+			document.getElementById("option1").type = "hidden";
+			x++;
+		} else if (x >= 9) {
+			puzzle2 ();	
+		}
+	}
+	
+	
+	function puzzle2 () {
+		document.getElementById("textBox").setAttribute("style" , "visibility:visible");
+		if (x == 9) {
+			document.getElementById("textBox").innerHTML = "";
+			document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+			document.getElementById("next").type = "hidden";
+			document.getElementById("option2a").type = "button";	
+			document.getElementById("option2b").type = "button";
+			document.getElementById("option2c").type = "button";
+			x++;
+		} else if (x == 10) {
+				if (y == 1) {
+					
+					clickedA = 1;
+				
+					document.getElementById("option2a").type = "hidden";	
+					document.getElementById("option2b").type = "hidden";
+					document.getElementById("option2c").type = "hidden";
+					
+					if (z == 1) {
+						document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+						document.getElementById("next").type = "hidden";
+						document.getElementById("location").innerHTML = "";
+						document.getElementById("next").value = "Next";
+						document.getElementById("option2a").value = "Search";
+						document.getElementById("option2a").type = "button";
+						z++;	
+					} else if (z == 2) {
+						document.getElementById("option2a").type = "hidden";
+						document.getElementById("next").type = "button";
+						document.getElementById("textBox").innerHTML = name + " finds a pirate's notebook. It reads: <br> Day 16: We just captured a fisherman. He meant no harm, but clearly we're pirates so we shouldn't really care. We gotta keep our image up. Anyways we're going to throw em into the brig with the former captain guy. Honestly, it's been tough finding things to do so I've been writing in this journal during my coffee breaks. Gotta love that coffee. <br> - CJS ";
+						z++;	
+					} else if (z == 3) {
+						document.getElementById("option2ab").type = "button";
+						document.getElementById("next").type = "hidden";
+						document.getElementById("textBox").innerHTML = "";
+						document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+						
+						
+					}
+					
+					
+					if (z == 0) {
+						document.getElementById("location").innerHTML = "Crew's Cabin";
+						document.getElementById("body4").style.backgroundImage = "url('images/crewcabinbg.jpg')";
+						document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+						z++;
+						locationShow ();
+						
+					}
+					
+					
+					
+				
+					
+					
+				} else if (y == 2) {
+					
+					clickedB = 1;
+					document.getElementById("location").innerHTML = "Storage Area";
+					document.getElementById("option2a").type = "hidden";	
+					document.getElementById("option2b").type = "hidden";
+					document.getElementById("option2c").type = "hidden";
+					
+					if (z == 1) {
+						document.getElementById("location").innerHTML ="";
+						document.getElementById("next").value = "Next";
+						document.getElementById("next").type = "button";
+						
+						if (playerChoice == 1) {
+							document.getElementById("textBox").innerHTML = "There is a sleeping guard. " + name + " must maneuver (clicking) himself in a way to avoid the objects and quietly retrieve the fireworks.";
+							document.getElementById("textBox").style.fontStyle = "italic";
+							z++;
+						} else if (playerChoice == 2) {
+							document.getElementById("textBox").innerHTML = "There is a sleeping guard. " + name + " must maneuver himself in a way to avoid the objects and quietly retrieve the passlock code to the row boat.";							document.getElementById("textBox").style.fontStyle = "italic";
+							z++;
+						}
+					} else if (z == 2) {
+						document.getElementById("location").innerHTML = "";
+						document.getElementById("tablePuzzle").setAttribute("style", "visibility:visible");
+						document.getElementById("next").type = "hidden";
+						document.getElementById("textBox").innerHTML = "";
+						document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+						document.getElementById("up").type = "button";
+						document.getElementById("down").type = "button";
+						document.getElementById("left").type = "button";
+						document.getElementById("right").type = "button";
+							
+					document.getElementById("start").style.backgroundColor = "white";
+					document.getElementById("path1").style.backgroundColor = "white";
+					document.getElementById("path2").style.backgroundColor = "white";
+					document.getElementById("path3").style.backgroundColor = "white";
+					document.getElementById("path4").style.backgroundColor = "white";
+					document.getElementById("path5").style.backgroundColor = "white";
+					document.getElementById("path6").style.backgroundColor = "white";
+					document.getElementById("path7").style.backgroundColor = "white";
+					document.getElementById("path8").style.backgroundColor = "white";
+					document.getElementById("path9").style.backgroundColor = "white";
+					document.getElementById("path10").style.backgroundColor = "white";
+					document.getElementById("path11").style.backgroundColor = "white";
+					document.getElementById("path12").style.backgroundColor = "white";
+					document.getElementById("sword").style.backgroundColor = "white";
+					document.getElementById("firecrackers").style.backgroundColor = "white";
+						
+							if (xco == 1 && yco == 1) {
+								
+								document.getElementById("start").style.backgroundColor = "#00FF33";
+								if (object2 == 1) {
+									document.getElementById("tablePuzzle").setAttribute("style", "visibility:hidden");
+									document.getElementById("location").innerHTML = "The Deck";	
+									document.getElementById("body4").style.backgroundImage = "url('images/thedeckbg.gif')";
+									document.getElementById("up").type = "hidden";
+									document.getElementById("down").type = "hidden";
+									document.getElementById("left").type = "hidden";
+									document.getElementById("right").type = "hidden";
+									sessionStorage.setItem("item1", object1);
+									x++;
+							
+									locationShow ();
+									
+								}
+								
+							} else if (xco == 2 && yco == 1) {
+							
+								document.getElementById("path1").style.backgroundColor = "#00FF33";
+							} else if (xco == 3 && yco == 1) {
+							
+								document.getElementById("path2").style.backgroundColor = "#00FF33";
+							} else if (xco == 4 && yco == 1) {
+							
+								document.getElementById("path3").style.backgroundColor = "#00FF33";
+							} else if (xco == 3 && yco == 2) {
+								document.getElementById("path4").style.backgroundColor = "#00FF33";
+							} else if (xco == 3 && yco == 3) {
+								document.getElementById("path5").style.backgroundColor = "#00FF33";
+							} else if (xco == 4 && yco == 3) {
+								document.getElementById("path6").style.backgroundColor = "#00FF33";
+							} else if (xco == 2 && yco == 3) {
+								document.getElementById("path7").style.backgroundColor = "#00FF33";
+							} else if (xco == 2 && yco == 4) {
+								document.getElementById("path8").style.backgroundColor = "#00FF33";
+							} else if (xco == 2 && yco == 5) {
+								document.getElementById("path9").style.backgroundColor = "#00FF33";
+							} else if (xco == 1 && yco == 5) {
+								document.getElementById("path10").style.backgroundColor = "#00FF33";
+							} else if (xco == 3 && yco == 5) {
+								document.getElementById("path11").style.backgroundColor = "#00FF33";
+							} else if (xco == 4 && yco == 5) {
+								document.getElementById("path12").style.backgroundColor = "#00FF33";
+							} else if (xco == 5 && yco == 3) {
+								document.getElementById("sword").style.backgroundColor = "#00FF33";
+									if (object1 == 0) {
+										document.getElementById("textBox").setAttribute("style" , "visibility:visible");
+									document.getElementById("textBox").innerHTML = "You found a sword!";
+									document.getElementById("textBox").style.fontStyle = "italic";
+									document.getElementById("sword").innerHTML = "";
+									}
+									object1 = 1;
+							} else if (xco == 5 && yco == 5) {
+								document.getElementById("firecrackers").style.backgroundColor = "#00FF33";
+								document.getElementById("firecrackers").innerHTML = "";
+								document.getElementById("start").innerHTML = "Exit";
+								if (object2 == 0) {
+									if (playerChoice == 1) {
+										document.getElementById("textBox").setAttribute("style" , "visibility:visible");
+									document.getElementById("textBox").innerHTML= "You found the firecrackers!";
+									document.getElementById("textBox").style.fontStyle = "italic";
+									} else if (playerChoice == 2) {
+									document.getElementById("textBox").setAttribute("style" , "visibility:visible");
+									document.getElementById("textBox").innerHTML = "You found the key lock password. It's UP DOWN DOWN UP LEFT RIGHT.";	
+									document.getElementById("textBox").style.fontStyle = "italic";
+									}
+								}
+								object2 = 1;
+							} else {
+								alert ("You hit the wall");
+								xco = 1;
+								yco = 1;
+								object1 = 0;
+								object2 = 0;
+								document.getElementById("firecrackers").innerHTML = "!!!";
+								document.getElementById("sword").innerHTML = "!!";
+								document.getElementById("start").innerHTML = "Start";
+								puzzle2 ();
+							}
+					}
+					
+					
+					if (z == 0) {
+						document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+						document.getElementById("body4").style.backgroundImage = "url('images/storageroombg.jpg')";
+						z++;
+						locationShow ();	
+					}
+					
+					
+					
+					
+					
+				} else if (y == 3) {
+					clickedC = 1;
+					
+					document.getElementById("option2a").type = "hidden";	
+					document.getElementById("option2b").type = "hidden";
+					document.getElementById("option2c").type = "hidden";
+					
+					if (z == 1) {
+						document.getElementById("location").innerHTML ="";
+						document.getElementById("next").value = "Next";
+						document.getElementById("next").type = "button";
+						
+							if (playerChoice == 1) {
+								document.getElementById("textBox").innerHTML = name + " reminds himself that he is to distract the pirates, not escape by himself.";	
+								document.getElementById("textBox").style.fontStyle = "italic";
+								z++;
+							} else if (playerChoice == 2) {
+								document.getElementById("textBox").innerHTML = "There seems to be a key lock protecting the row boat. There must be something down in the storage."
+								document.getElementById("textBox").style.color = "#35dd43";
+								z++;
+							}
+					} else if (z == 2) {
+						document.getElementById("option2ab").type = "button";	
+						document.getElementById("textBox").innerHTML = "";
+						document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+						document.getElementById("next").type = "hidden";
+					}
+					
+					
+					if (z == 0) {
+						document.getElementById("location").innerHTML = "The Starboard";
+						document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+						z++;
+						locationShow ();	
+					}
+						
+						
+						
+						
+						
+						
+				}	else if (y == 4) {
+						if (z ==5) {
+					z = 0;
+					document.getElementById("body4").style.backgroundImage = "url('images/thedeckbg.gif')";
+					document.getElementById("location").innerHTML = "The Deck";
+					document.getElementById("option2a").type = "hidden";
+					document.getElementById("option2ab").type = "hidden";	
+					document.getElementById("option2b").type = "hidden";
+					document.getElementById("option2c").type = "hidden";
+					document.getElementById("textBox").innerHTML = "";
+					document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+					document.getElementById("next").type = "hidden";
+						locationShow ();
+						} else  {
+							document.getElementById("next").type = "hidden";
+							document.getElementById("textBox").setAttribute("style" , "visibility:hidden");
+							
+					if (clickedA == 0) {
+						document.getElementById("option2a").type = "button";
+					} 
+					if (clickedB == 0) {
+						document.getElementById("option2b").type = "button";
+					}
+					if (clickedC == 0) {
+						document.getElementById("option2c").type = "button";
+					}
+					
+						}
+					
+				}
+		} else if (x == 11) {
+				window.location = "FourthLevel.html";
+		}
+	}
+	
+	
+	
+	
+	
+	</script>
+</html>
